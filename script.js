@@ -25,8 +25,8 @@ const INSTITUTE_CONFIG = {
   
   // Social Media Links
   social: {
-    facebook: "https://facebook.com/shauryavision",
-    instagram: "https://instagram.com/shauryavision",
+    facebook: "https://www.facebook.com/shauryavision",
+    instagram: "https://www.instagram.com/shauryavision20/",
     youtube: "https://youtube.com/@shauryavision",
     linkedin: "https://linkedin.com/company/shauryavision",
     whatsapp: "https://wa.me/919580672702"
