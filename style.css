@@ -1000,13 +1000,29 @@ button {
   position: relative;
   z-index: 2;
   text-align: center;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid rgba(0, 210, 255, 0.4);
+  box-shadow: 0 25px 60px rgba(10, 25, 47, 0.35), 0 0 45px rgba(0, 210, 255, 0.2);
+  animation: heroFloat 6s ease-in-out infinite alternate;
 }
 
 .hero-student-img {
-  max-height: 480px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 30px rgba(10, 25, 47, 0.18));
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-image-frame:hover .hero-student-img {
+  transform: scale(1.04);
+}
+
+@keyframes heroFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-10px); }
 }
 
 .floating-glass-card {
@@ -1014,20 +1030,20 @@ button {
   display: flex;
   align-items: center;
   gap: 12px;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 11px 18px;
   border-radius: var(--radius-md);
-  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.15), 0 0 20px rgba(0, 210, 255, 0.12);
   z-index: 3;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .floating-glass-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 16px 36px rgba(0, 210, 255, 0.25);
+  transform: translateY(-5px) scale(1.04) !important;
+  box-shadow: 0 18px 40px rgba(0, 210, 255, 0.35);
 }
 
 .glass-icon-box {
@@ -1063,37 +1079,74 @@ button {
 }
 
 .float-card-1 {
-  top: 15%;
-  right: -20px;
-  animation: floatSlow 5s ease-in-out infinite;
+  top: 10%;
+  right: -25px;
+  animation: floatCard1 4.5s ease-in-out infinite alternate;
 }
 
 .float-card-2 {
-  bottom: 22%;
-  left: -25px;
-  animation: floatMedium 6s ease-in-out infinite 0.5s;
+  bottom: 18%;
+  left: -30px;
+  animation: floatCard2 5.5s ease-in-out infinite alternate 0.8s;
 }
 
 .float-card-3 {
-  bottom: 5%;
-  right: 0px;
-  animation: floatSlow 5.5s ease-in-out infinite 1s;
+  bottom: -15px;
+  right: 15px;
+  animation: floatCard3 5s ease-in-out infinite alternate 1.5s;
 }
 
-.float-card-4 {
-  top: -10px;
-  right: 45%;
-  animation: floatMedium 7s ease-in-out infinite 1.5s;
+.hero-code-card {
+  animation: floatCardCode 6s ease-in-out infinite alternate;
 }
 
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes floatCard1 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-12px) rotate(-1.5deg); }
 }
 
-@keyframes floatMedium {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(10px); }
+@keyframes floatCard2 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(12px) rotate(1.5deg); }
+}
+
+@keyframes floatCard3 {
+  0% { transform: translateY(0px) rotate(0deg); }
+  100% { transform: translateY(-8px) rotate(-1deg); }
+}
+
+@keyframes floatCardCode {
+  0% { transform: translateY(0px) translateX(0px); }
+  100% { transform: translateY(-8px) translateX(4px); }
+}
+
+/* Shimmer Button Light Sweep Effect */
+.btn-primary, .btn-secondary, .announcement-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after, .btn-secondary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -70%;
+  width: 45%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 20%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 80%
+  );
+  transform: rotate(25deg);
+  animation: btnShimmerSweep 5s infinite;
+  pointer-events: none;
+}
+
+@keyframes btnShimmerSweep {
+  0%, 75% { left: -70%; }
+  100% { left: 160%; }
 }
 
 /* --------------------------------------------------------------------------
@@ -1718,10 +1771,14 @@ button {
   overflow: hidden;
 }
 
+.course-card {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
 .course-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px) scale(1.015);
   border-color: var(--accent-cyan);
-  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1), 0 0 20px rgba(0, 210, 255, 0.2);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12), 0 0 25px rgba(0, 210, 255, 0.25);
 }
 
 .course-card.hide {
@@ -1737,7 +1794,7 @@ button {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Course Card Image Wrap */
+/* Course Card Image Wrap with Light Sheen Sweep */
 .course-card-image-wrap {
   position: relative;
   width: 100%;
@@ -1748,15 +1805,37 @@ button {
   background: var(--bg-light-blue);
 }
 
+.course-card-image-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-25deg);
+  transition: left 0.7s ease;
+  pointer-events: none;
+}
+
+.course-card:hover .course-card-image-wrap::after {
+  left: 160%;
+}
+
 .course-card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .course-card:hover .course-card-img {
-  transform: scale(1.08);
+  transform: scale(1.09) rotate(0.4deg);
 }
 
 .course-level-tag {
